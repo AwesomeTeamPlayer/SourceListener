@@ -23,31 +23,31 @@ class UnregisterClientMessageJsonValidatorTest extends \PHPUnit_Framework_TestCa
 				false
 			],
 			[
-				[RegisterClientMessageJsonValidator::CLIENT_ID_LABEL => 'abc'],
+				[UnregisterClientMessageJsonValidator::CLIENT_ID_LABEL => 'abc'],
 				false
 			],
 			[
-				[RegisterClientMessageJsonValidator::SOURCE_ID_LABEL => 'abc'],
+				[UnregisterClientMessageJsonValidator::SOURCE_ID_LABEL => 'abc'],
 				false
 			],
 			[
 				[
-					RegisterClientMessageJsonValidator::CLIENT_ID_LABEL => 123,
-					RegisterClientMessageJsonValidator::SOURCE_ID_LABEL => 'abc'
+					UnregisterClientMessageJsonValidator::CLIENT_ID_LABEL => 123,
+					UnregisterClientMessageJsonValidator::SOURCE_ID_LABEL => 'abc'
 				],
 				false
 			],
 			[
 				[
-					RegisterClientMessageJsonValidator::CLIENT_ID_LABEL => 'abc',
-					RegisterClientMessageJsonValidator::SOURCE_ID_LABEL => 123
+					UnregisterClientMessageJsonValidator::CLIENT_ID_LABEL => 'abc',
+					UnregisterClientMessageJsonValidator::SOURCE_ID_LABEL => 123
 				],
 				false
 			],
 			[
 				[
-					RegisterClientMessageJsonValidator::CLIENT_ID_LABEL => 'abc',
-					RegisterClientMessageJsonValidator::SOURCE_ID_LABEL => 'abc'
+					UnregisterClientMessageJsonValidator::CLIENT_ID_LABEL => 'abc',
+					UnregisterClientMessageJsonValidator::SOURCE_ID_LABEL => 'abc'
 				],
 				true
 			]
