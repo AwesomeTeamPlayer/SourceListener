@@ -1,9 +1,12 @@
 <?php
 
+use Controllers\InformClientController;
 use Controllers\RegisterClientController;
 use Controllers\UnregisterClientController;
+use Controllers\Validators\InformClientMessageJsonValidator;
 use Controllers\Validators\RegisterClientMessageJsonValidator;
 use Controllers\Validators\UnregisterClientMessageJsonValidator;
+use Domain\InformClientService;
 use Repositories\RedisClientsSourcesStoreRepository;
 
 error_reporting(E_ALL);
@@ -38,12 +41,16 @@ $app->get('/unregister-client', function ($request, $response, $args) use ($redi
 	$registerClientController->run($request, $response);
 });
 
-//$app->get('/inform-clients', function ($request, $response, $args) use ($redis) {
-//	$registerClientController = new InformClientController(
-//		new RedisClientsSourcesStoreRepository($redis)
-//	);
-//	$registerClientController->run($request, $response);
-//});
+$app->get('/inform-clients', function ($request, $response, $args) use ($redis) {
+	$registerClientController = new InformClientController(
+		new InformClientMessageJsonValidator(),
+		new InformClientService(
+			new RedisClientsSourcesStoreRepository($redis),
+			200
+		)
+	);
+	$registerClientController->run($request, $response);
+});
 
 $app->post('/', function ($request, $response, $args) {
 
