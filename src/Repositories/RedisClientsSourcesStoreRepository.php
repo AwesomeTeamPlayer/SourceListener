@@ -12,9 +12,9 @@ class RedisClientsSourcesStoreRepository implements ClientsSourcesStoreRepositor
 	 */
 	private $redis;
 
-	public function __construct(Redis $redis)
+	public function __construct(string $host, int $post)
 	{
-		$this->redis = $redis;
+//		$this->redis = $redis;
 	}
 
 	/**
