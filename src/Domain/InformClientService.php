@@ -57,7 +57,7 @@ class InformClientService
 		);
 
 		$this->messageSender->sendMessage(
-			$informClientsMessage->message(),
+			$informClientsMessage,
 			$clientsIds
 		);
 	}
