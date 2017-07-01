@@ -11,6 +11,8 @@ class StringToStream implements StreamInterface
 	 */
 	private $string;
 
+	private $position = 0;
+
 	/**
 	 * @param string $string
 	 */
@@ -56,6 +58,7 @@ class StringToStream implements StreamInterface
 	 */
 	public function detach()
 	{
+		return null;
 	}
 
 	/**
@@ -113,6 +116,7 @@ class StringToStream implements StreamInterface
 	 */
 	public function seek($offset, $whence = SEEK_SET)
 	{
+		$this->position = $offset;
 	}
 
 	/**
@@ -127,6 +131,7 @@ class StringToStream implements StreamInterface
 	 */
 	public function rewind()
 	{
+		$this->position = 0;
 	}
 
 	/**
@@ -173,7 +178,7 @@ class StringToStream implements StreamInterface
 	 */
 	public function read($length)
 	{
-		return substr($this->string, 0, $length);
+		return mb_substr($this->string, $this->position, $length);
 	}
 
 	/**
@@ -185,7 +190,7 @@ class StringToStream implements StreamInterface
 	 */
 	public function getContents()
 	{
-		return $this->string;
+		return mb_substr($this->string, $this->position, mb_strlen($this->string));
 	}
 
 	/**

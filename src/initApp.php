@@ -1,14 +1,23 @@
 <?php
 
+use Controllers\InformClientController;
 use Controllers\RegisterClientController;
 use Controllers\UnregisterClientController;
+use Controllers\Validators\InformClientMessageJsonValidator;
 use Controllers\Validators\RegisterClientMessageJsonValidator;
 use Controllers\Validators\UnregisterClientMessageJsonValidator;
 use Domain\Adapters\ClientsSourcesStoreRepositoryInterface;
+use Domain\Adapters\HttpRequestToWsServerSenderInterface;
+use Domain\ClientIdDecoder;
+use Domain\DecodedClientsIdsCollectionByUniqueUriGrouper;
+use Domain\InformClientService;
+use Domain\MessageSender;
 
 function initApp(
 	\Slim\Container $container,
-	ClientsSourcesStoreRepositoryInterface $clientsSourcesStoreRepository
+	ClientsSourcesStoreRepositoryInterface $clientsSourcesStoreRepository,
+	HttpRequestToWsServerSenderInterface $httpRequestToWsServerSender,
+	int $paginationLimitInInformingClients
 )
 {
 	$app = new Slim\App($container);
@@ -29,27 +38,25 @@ function initApp(
 		$unregisterClientController->run($request, $response);
 	});
 
-//$app->get('/inform-clients', function ($request, $response, $args) use ($redis, $config) {
-//	$registerClientController = new InformClientController(
-//		new InformClientMessageJsonValidator(),
-//		new InformClientService(
-//			new RedisClientsSourcesStoreRepository($redis),
-//			$config['pagination_limit']
-//		)
-//	);
-//	$registerClientController->run($request, $response);
-//});
+	$informClientController = new InformClientController(
+		new InformClientMessageJsonValidator(),
+		new InformClientService(
+			$clientsSourcesStoreRepository,
+			new MessageSender(
+				new ClientIdDecoder(),
+				new DecodedClientsIdsCollectionByUniqueUriGrouper(),
+				$httpRequestToWsServerSender
+			),
+			$paginationLimitInInformingClients
+		)
+	);
+	$app->post('/inform-clients', function ($request, $response) use ($informClientController) {
+		$informClientController->run($request, $response);
+	});
 
-//	$app->get('/', function ($request, $response, $args) use ($container) {
-//
-//		$registerClientController = new RegisterClientController(
-//			$container->get('clientSourceStore'),
-//			new RegisterClientMessageJsonValidator()
-//		);
-//		$registerClientController->run($request, $response);
-//
-////	$response->write("source listener" . $container->get('abcasf'));
-//	});
+	$app->get('/', function ($request, $response, $args) use ($container) {
+		$response->write('source listener');
+	});
 
 	return $app;
 }

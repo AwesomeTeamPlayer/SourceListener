@@ -22,7 +22,7 @@ class MemoryClientsSourcesStoreRepository implements ClientsSourcesStoreReposito
 	 *
 	 * @return void
 	 */
-	function add(string $clientId, string $sourceId)
+	public function add(string $clientId, string $sourceId)
 	{
 		$this->clients[$sourceId][] = $clientId;
 	}
@@ -36,7 +36,7 @@ class MemoryClientsSourcesStoreRepository implements ClientsSourcesStoreReposito
 	 *
 	 * @return void
 	 */
-	function remove(string $clientId, string $sourceId)
+	public function remove(string $clientId, string $sourceId)
 	{
 		if (array_key_exists($sourceId, $this->clients) === false)
 		{
@@ -53,7 +53,7 @@ class MemoryClientsSourcesStoreRepository implements ClientsSourcesStoreReposito
 	 *
 	 * @return int
 	 */
-	function countAllClients(string $sourceId): int
+	public function countAllClients(string $sourceId): int
 	{
 		if (array_key_exists($sourceId, $this->clients) === false)
 		{
@@ -72,7 +72,7 @@ class MemoryClientsSourcesStoreRepository implements ClientsSourcesStoreReposito
 	 *
 	 * @return string[]
 	 */
-	function getClients(string $sourceId, int $offset, int $limit): array
+	public function getClients(string $sourceId, int $offset, int $limit): array
 	{
 		if (array_key_exists($sourceId, $this->clients) === false)
 		{
@@ -80,7 +80,7 @@ class MemoryClientsSourcesStoreRepository implements ClientsSourcesStoreReposito
 		}
 
 		$toReturn = [];
-		for ($i = $offset; $i < $offset + $limit; $i++)
+		for ($i = $offset; $i < min($offset + $limit, count($this->clients[$sourceId])); $i++)
 		{
 			$toReturn[] = $this->clients[$sourceId][$i];
 		}

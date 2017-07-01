@@ -9,10 +9,12 @@ use Slim\Http\Headers;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use tests\helpers\MemoryClientsSourcesStoreRepository;
+use tests\helpers\MockedHttpRequestToWsServerSender;
 use tests\helpers\StringToStream;
 
 require_once __DIR__ . '/../../../src/initApp.php';
 require_once __DIR__ . '/../../../tests/helpers/MemoryClientsSourcesStoreRepository.php';
+require_once __DIR__ . '/../../../tests/helpers/MockedHttpRequestToWsServerSender.php';
 require_once __DIR__ . '/../../../tests/helpers/StringToStream.php';
 
 class RegisterClientTest extends \PHPUnit_Framework_TestCase
@@ -43,7 +45,9 @@ class RegisterClientTest extends \PHPUnit_Framework_TestCase
 
 		$this->app = initApp(
 			$container,
-			$this->clientSourcesStoreRepository
+			$this->clientSourcesStoreRepository,
+			new MockedHttpRequestToWsServerSender(),
+			200
 		);
 	}
 

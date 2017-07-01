@@ -25,14 +25,17 @@ class InformClientService
 
 	/**
 	 * @param ClientsSourcesStoreRepositoryInterface $clientsSourcesStoreRepository
+	 * @param MessageSender $messageSender
 	 * @param int $paginationLimit
 	 */
 	public function __construct(
 		ClientsSourcesStoreRepositoryInterface $clientsSourcesStoreRepository,
+		MessageSender $messageSender,
 		int $paginationLimit
 	)
 	{
 		$this->clientsSourcesStoreRepository = $clientsSourcesStoreRepository;
+		$this->messageSender = $messageSender;
 		$this->paginationLimit = $paginationLimit;
 	}
 
