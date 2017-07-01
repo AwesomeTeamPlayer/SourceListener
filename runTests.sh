@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-./vendor/bin/phpunit ./tests/units
+./vendor/bin/phpunit ./tests
