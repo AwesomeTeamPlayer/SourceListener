@@ -2,6 +2,7 @@
 
 namespace Domain;
 
+use Domain\Adapters\HttpRequestToWsServerSenderInterface;
 use Domain\ValueObjects\DecodedClientId;
 use Domain\ValueObjects\InformClientsMessage;
 use Domain\ValueObjects\MessageToWsServer;

@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Controllers\Validators\UnregisterClientMessageJsonValidator;
-use Domain\ClientsSourcesStoreRepositoryInterface;
+use Domain\Adapters\ClientsSourcesStoreRepositoryInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain;
+namespace Domain\Adapters;
 
 /**
  * Interface for store storing unique (clientId, sourceId) pairs.

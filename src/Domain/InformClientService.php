@@ -2,6 +2,7 @@
 
 namespace Domain;
 
+use Domain\Adapters\ClientsSourcesStoreRepositoryInterface;
 use Domain\ValueObjects\InformClientsMessage;
 
 class InformClientService

@@ -2,6 +2,7 @@
 
 namespace Domain;
 
+use Domain\Adapters\HttpRequestToWsServerSenderInterface;
 use Domain\ValueObjects\DecodedClientsIdsWithUniqueUriCollection;
 use Domain\ValueObjects\Exceptions\DecodedClientsIdsWithUniqueUriCollectionIsEmptyException;
 use Domain\ValueObjects\InformClientsMessage;

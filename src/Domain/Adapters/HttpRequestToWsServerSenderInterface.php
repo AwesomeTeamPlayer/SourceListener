@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain;
+namespace Domain\Adapters;
 
 use Domain\ValueObjects\MessageToWsServer;
 use Psr\Http\Message\UriInterface;

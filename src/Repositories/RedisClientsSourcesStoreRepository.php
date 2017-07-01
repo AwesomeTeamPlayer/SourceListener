@@ -2,7 +2,7 @@
 
 namespace Repositories;
 
-use Domain\ClientsSourcesStoreRepositoryInterface;
+use Domain\Adapters\ClientsSourcesStoreRepositoryInterface;
 use Redis;
 
 class RedisClientsSourcesStoreRepository implements ClientsSourcesStoreRepositoryInterface
