@@ -7,6 +7,29 @@ use GuzzleHttp\Psr7\Uri;
 
 class DecodedClientsIdsWithUniqueUriCollectionTest extends \PHPUnit_Framework_TestCase
 {
+	public function test_constructor_initialization()
+	{
+		$collection = new DecodedClientsIdsWithUniqueUriCollection([
+			new DecodedClientId(new Uri('http://google.om'), 'abc1'),
+			new DecodedClientId(new Uri('http://google.om'), 'abc2'),
+			new DecodedClientId(new Uri('http://google.om'), 'abc3'),
+			new DecodedClientId(new Uri('http://google.om'), 'abc4'),
+		]);
+		$this->assertEquals(4, $collection->size());
+	}
+
+	public function test_constructor_initialization_with_non_unique_uri()
+	{
+		$this->setExpectedException(IncorrectDecodedClientIdObjectException::class);
+		$collection = new DecodedClientsIdsWithUniqueUriCollection([
+			new DecodedClientId(new Uri('http://google.com'), 'abc1'),
+			new DecodedClientId(new Uri('http://google.com'), 'abc2'),
+			new DecodedClientId(new Uri('http://bing.com'), 'xyz'),
+			new DecodedClientId(new Uri('http://google.com'), 'abc4'),
+		]);
+		$this->assertEquals(3, $collection->size());
+	}
+
 	public function test_push_to_empty_collection()
 	{
 		$collection = new DecodedClientsIdsWithUniqueUriCollection();

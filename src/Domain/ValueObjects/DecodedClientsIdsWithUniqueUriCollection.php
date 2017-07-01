@@ -22,6 +22,18 @@ class DecodedClientsIdsWithUniqueUriCollection implements \Iterator
 	private $size = 0;
 
 	/**
+	 * @param array $decodedClientIds
+	 *
+	 * @throws IncorrectDecodedClientIdObjectException
+	 */
+	public function __construct(array $decodedClientIds = [])
+	{
+		foreach ($decodedClientIds as $decodedClientId) {
+			$this->push($decodedClientId);
+		}
+	}
+
+	/**
 	 * @param DecodedClientId $decodedClientId
 	 *
 	 * @return void

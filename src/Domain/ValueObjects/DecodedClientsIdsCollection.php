@@ -68,20 +68,4 @@ class DecodedClientsIdsCollection
 
 		return $clonedArray;
 	}
-
-	/**
-	 * @return DecodedClientId[][]
-	 */
-	public function group(): array
-	{
-		$grouped = [];
-
-		foreach ($this->decodedClientsIds as $decodedClientId)
-		{
-			$grouped[$decodedClientId->uri()->__toString()][] = $decodedClientId;
-		}
-
-		return $grouped;
-	}
-
 }
