@@ -1,7 +1,9 @@
 <?php
 
 use Controllers\RegisterClientController;
+use Controllers\UnregisterClientController;
 use Controllers\Validators\RegisterClientMessageJsonValidator;
+use Controllers\Validators\UnregisterClientMessageJsonValidator;
 use Domain\Adapters\ClientsSourcesStoreRepositoryInterface;
 
 function initApp(
@@ -15,18 +17,18 @@ function initApp(
 		$clientsSourcesStoreRepository,
 		new RegisterClientMessageJsonValidator()
 	);
-	$app->post('/register-client', function ($request, $response, $args) use ($registerClientController) {
+	$app->post('/register-client', function ($request, $response) use ($registerClientController) {
 		$registerClientController->run($request, $response);
 	});
 
-//$app->get('/unregister-client', function ($request, $response, $args) use ($redis) {
-//	$registerClientController = new UnregisterClientController(
-//		new RedisClientsSourcesStoreRepository($redis),
-//		new UnregisterClientMessageJsonValidator()
-//	);
-//	$registerClientController->run($request, $response);
-//});
-//
+	$unregisterClientController = new UnregisterClientController(
+		$clientsSourcesStoreRepository,
+		new UnregisterClientMessageJsonValidator()
+	);
+	$app->post('/unregister-client', function ($request, $response) use ($unregisterClientController) {
+		$unregisterClientController->run($request, $response);
+	});
+
 //$app->get('/inform-clients', function ($request, $response, $args) use ($redis, $config) {
 //	$registerClientController = new InformClientController(
 //		new InformClientMessageJsonValidator(),

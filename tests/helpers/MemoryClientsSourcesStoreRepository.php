@@ -43,7 +43,7 @@ class MemoryClientsSourcesStoreRepository implements ClientsSourcesStoreReposito
 			return;
 		}
 
-		array_diff($this->clients[$sourceId], [ $clientId ]);
+		$this->clients[$sourceId] = array_diff($this->clients[$sourceId], [ $clientId ]);
 	}
 
 	/**
