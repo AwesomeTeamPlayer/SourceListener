@@ -2,6 +2,7 @@
 
 namespace Domain\ValueObjects;
 
+use Domain\ValueObjects\Exceptions\DecodedClientsIdsWithUniqueUriCollectionIsEmptyException;
 use Domain\ValueObjects\Exceptions\IncorrectDecodedClientIdObjectException;
 use GuzzleHttp\Psr7\Uri;
 
@@ -56,5 +57,22 @@ class DecodedClientsIdsWithUniqueUriCollectionTest extends \PHPUnit_Framework_Te
 
 		$this->setExpectedException(IncorrectDecodedClientIdObjectException::class);
 		$collection->push(new DecodedClientId(new Uri('http://bong.com'), 'abc2'));
+	}
+
+	public function test_getUri_on_empty_collection()
+	{
+		$collection = new DecodedClientsIdsWithUniqueUriCollection();
+		$this->setExpectedException(DecodedClientsIdsWithUniqueUriCollectionIsEmptyException::class);
+		$collection->getUri();
+	}
+
+	public function test_getUri_on_not_empty_collection()
+	{
+		$collection = new DecodedClientsIdsWithUniqueUriCollection([
+			new DecodedClientId(new Uri('http://google.om'), 'abc1')
+		]);
+		$uri = $collection->getUri();
+
+		$this->assertEquals(new Uri('http://google.om'), $uri);
 	}
 }

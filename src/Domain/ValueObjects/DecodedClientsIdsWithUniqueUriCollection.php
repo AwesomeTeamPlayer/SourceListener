@@ -2,7 +2,9 @@
 
 namespace Domain\ValueObjects;
 
+use Domain\ValueObjects\Exceptions\DecodedClientsIdsWithUniqueUriCollectionIsEmptyException;
 use Domain\ValueObjects\Exceptions\IncorrectDecodedClientIdObjectException;
+use Psr\Http\Message\UriInterface;
 
 class DecodedClientsIdsWithUniqueUriCollection implements \Iterator
 {
@@ -49,6 +51,20 @@ class DecodedClientsIdsWithUniqueUriCollection implements \Iterator
 
 		$this->array[] = $decodedClientId;
 		$this->size++;
+	}
+
+	/**
+	 * @return UriInterface
+	 *
+	 * @throws DecodedClientsIdsWithUniqueUriCollectionIsEmptyException
+	 */
+	public function getUri() : UriInterface
+	{
+		if ($this->size() > 0) {
+			return $this->array[0]->uri();
+		}
+
+		throw new DecodedClientsIdsWithUniqueUriCollectionIsEmptyException();
 	}
 
 	/**
