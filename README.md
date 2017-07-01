@@ -3,5 +3,5 @@
 
 ## How to test?
 ```
-docker run awesometeamplayer:sourcelistener /app/vendor/bin/phpunit /app/tests/units
+docker run awesometeamplayer:sourcelistener /app/runTests.sh
 ```
