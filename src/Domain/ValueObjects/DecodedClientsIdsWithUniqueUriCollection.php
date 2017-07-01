@@ -36,6 +36,21 @@ class DecodedClientsIdsWithUniqueUriCollection implements \Iterator
 	}
 
 	/**
+	 * @return string[]
+	 */
+	public function getClientsIds() : array
+	{
+		$clientsIds = [];
+
+		foreach ($this->array as $decodedClientId)
+		{
+			$clientsIds[] = $decodedClientId->connectionId();
+		}
+
+		return $clientsIds;
+	}
+
+	/**
 	 * @param DecodedClientId $decodedClientId
 	 *
 	 * @return void

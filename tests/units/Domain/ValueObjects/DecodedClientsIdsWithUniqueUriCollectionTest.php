@@ -75,4 +75,28 @@ class DecodedClientsIdsWithUniqueUriCollectionTest extends \PHPUnit_Framework_Te
 
 		$this->assertEquals(new Uri('http://google.com'), $uri);
 	}
+
+	public function test_getClientsIds_on_empty_collection()
+	{
+		$collection = new DecodedClientsIdsWithUniqueUriCollection();
+		$this->assertEmpty($collection->getClientsIds());
+	}
+
+	public function test_getClientsIds_on_not_empty_collection()
+	{
+		$collection = new DecodedClientsIdsWithUniqueUriCollection();
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc1'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc2'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc3'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc4'));
+		$this->assertEquals(
+			[
+				'abc1',
+				'abc2',
+				'abc3',
+				'abc4',
+			],
+			$collection->getClientsIds()
+		);
+	}
 }
