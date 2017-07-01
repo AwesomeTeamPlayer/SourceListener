@@ -11,10 +11,10 @@ class DecodedClientsIdsWithUniqueUriCollectionTest extends \PHPUnit_Framework_Te
 	public function test_constructor_initialization()
 	{
 		$collection = new DecodedClientsIdsWithUniqueUriCollection([
-			new DecodedClientId(new Uri('http://google.om'), 'abc1'),
-			new DecodedClientId(new Uri('http://google.om'), 'abc2'),
-			new DecodedClientId(new Uri('http://google.om'), 'abc3'),
-			new DecodedClientId(new Uri('http://google.om'), 'abc4'),
+			new DecodedClientId(new Uri('http://google.com'), 'abc1'),
+			new DecodedClientId(new Uri('http://google.com'), 'abc2'),
+			new DecodedClientId(new Uri('http://google.com'), 'abc3'),
+			new DecodedClientId(new Uri('http://google.com'), 'abc4'),
 		]);
 		$this->assertEquals(4, $collection->size());
 	}
@@ -35,7 +35,7 @@ class DecodedClientsIdsWithUniqueUriCollectionTest extends \PHPUnit_Framework_Te
 	{
 		$collection = new DecodedClientsIdsWithUniqueUriCollection();
 		$this->assertEquals(0, $collection->size());
-		$collection->push(new DecodedClientId(new Uri('http://google.om'), 'abc123'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc123'));
 		$this->assertEquals(1, $collection->size());
 	}
 
@@ -43,17 +43,17 @@ class DecodedClientsIdsWithUniqueUriCollectionTest extends \PHPUnit_Framework_Te
 	{
 		$collection = new DecodedClientsIdsWithUniqueUriCollection();
 		$this->assertEquals(0, $collection->size());
-		$collection->push(new DecodedClientId(new Uri('http://google.om'), 'abc1'));
-		$collection->push(new DecodedClientId(new Uri('http://google.om'), 'abc2'));
-		$collection->push(new DecodedClientId(new Uri('http://google.om'), 'abc3'));
-		$collection->push(new DecodedClientId(new Uri('http://google.om'), 'abc4'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc1'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc2'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc3'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc4'));
 		$this->assertEquals(4, $collection->size());
 	}
 
 	public function test_push_with_different_uri_address()
 	{
 		$collection = new DecodedClientsIdsWithUniqueUriCollection();
-		$collection->push(new DecodedClientId(new Uri('http://google.om'), 'abc1'));
+		$collection->push(new DecodedClientId(new Uri('http://google.com'), 'abc1'));
 
 		$this->setExpectedException(IncorrectDecodedClientIdObjectException::class);
 		$collection->push(new DecodedClientId(new Uri('http://bong.com'), 'abc2'));
@@ -69,10 +69,10 @@ class DecodedClientsIdsWithUniqueUriCollectionTest extends \PHPUnit_Framework_Te
 	public function test_getUri_on_not_empty_collection()
 	{
 		$collection = new DecodedClientsIdsWithUniqueUriCollection([
-			new DecodedClientId(new Uri('http://google.om'), 'abc1')
+			new DecodedClientId(new Uri('http://google.com'), 'abc1')
 		]);
 		$uri = $collection->getUri();
 
-		$this->assertEquals(new Uri('http://google.om'), $uri);
+		$this->assertEquals(new Uri('http://google.com'), $uri);
 	}
 }
