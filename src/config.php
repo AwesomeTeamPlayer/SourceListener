@@ -5,5 +5,5 @@ return [
 		'host' => getenv('REDIS_HOST'),
 		'port' => getenv('REDIS_PORT')
 	],
-	'pagination_limit' => getenv('PAGINATION_LIMIT')
+	'pagination_limit' => (int) getenv('PAGINATION_LIMIT')
 ];
