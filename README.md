@@ -1,6 +1,18 @@
 # My project's README
 
 
+## How to run server?
+```
+docker run -it -p="80:80" -e REDIS_HOST=localhost -e REDIS_PORT=1234 -e PAGINATION_LIMIT=200 awesometeamplayer/sourcelistener
+```
+
+## Variables:
+
+* REDIS_HOST
+* REDIS_PORT
+* PAGINATION_LIMIT
+
+
 ## How to run unit and integration tests?
 ```
 docker run awesometeamplayer:sourcelistener /app/runTests.sh

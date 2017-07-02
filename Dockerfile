@@ -1,8 +1,10 @@
-FROM php:7.1-fpm
+FROM awesometeamplayer/php
 
 ADD . /app
 WORKDIR /app
 
-RUN pecl install redis
+RUN apt install -y php-redis
 
 RUN bash -c "echo extension=redis.so > /usr/local/etc/php/conf.d/redis.ini"
+
+RUN service apache2 start
