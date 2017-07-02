@@ -62,7 +62,8 @@ class InformClientsTest extends \PHPUnit_Framework_TestCase
 			$container,
 			$this->clientSourcesStoreRepository,
 			$this->mockedHttpRequestToWsServerSender,
-			200
+			200,
+			[]
 		);
 	}
 

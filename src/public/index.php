@@ -27,6 +27,7 @@ $app = initApp(
 		$config['redis']['port']
 	),
 	new HttpRequestToWsServerSender(),
-	$config['pagination_limit']
+	$config['pagination_limit'],
+	$config
 );
 $app->run();

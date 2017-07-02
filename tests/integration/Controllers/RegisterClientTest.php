@@ -47,7 +47,8 @@ class RegisterClientTest extends \PHPUnit_Framework_TestCase
 			$container,
 			$this->clientSourcesStoreRepository,
 			new MockedHttpRequestToWsServerSender(),
-			200
+			200,
+			[]
 		);
 	}
 

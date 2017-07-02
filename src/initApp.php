@@ -12,12 +12,14 @@ use Domain\ClientIdDecoder;
 use Domain\DecodedClientsIdsCollectionByUniqueUriGrouper;
 use Domain\InformClientService;
 use Domain\MessageSender;
+use Slim\Http\Response;
 
 function initApp(
 	\Slim\Container $container,
 	ClientsSourcesStoreRepositoryInterface $clientsSourcesStoreRepository,
 	HttpRequestToWsServerSenderInterface $httpRequestToWsServerSender,
-	int $paginationLimitInInformingClients
+	int $paginationLimitInInformingClients,
+	array $config
 )
 {
 	$app = new Slim\App($container);
@@ -54,8 +56,13 @@ function initApp(
 		$informClientController->run($request, $response);
 	});
 
-	$app->get('/', function ($request, $response, $args) use ($container) {
-		$response->write('source listener');
+	$app->get('/', function ($request, Response $response, $args) use ($config) {
+		$response->write(json_encode(
+			[
+				'type' => 'source-listener',
+				'config' => $config,
+			]
+		));
 	});
 
 	return $app;
