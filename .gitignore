@@ -1,7 +1,3 @@
 .idea/
 /vendor/
 /composer.lock
-/docker_tests/docker-compose/log/nginx/project_error.log
-/docker_tests/docker-compose/log/nginx/error.log
-/docker_tests/docker-compose/log/nginx/project_access.log
-/docker_tests/docker-compose/log/nginx/access.log
