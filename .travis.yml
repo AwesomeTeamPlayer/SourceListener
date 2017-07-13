@@ -1,6 +1,6 @@
 language: php
 php: '7.1'
 
-install:
+before_install:
   - composer install
   - ./vendor/bin/phpunit ./tests
