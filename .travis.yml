@@ -3,4 +3,4 @@ php: '7.1'
 
 install:
   - composer install
-  - ./runTests.sh
+  - ./vendor/bin/phpunit ./tests
