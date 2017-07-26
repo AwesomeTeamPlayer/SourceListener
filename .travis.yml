@@ -1,6 +1,7 @@
 language: php
 php: '7.1'
 
-before_install:
+install:
   - composer install
-  - ./runTests.sh
+
+script: ./runTests.sh
